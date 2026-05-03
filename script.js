@@ -6,6 +6,26 @@ function scrollTo(sectionId) {
     }
 }
 
+// Filter rentals by category
+function filterCategory(category) {
+    const cards = document.querySelectorAll('.property-card');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    // Update active button
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter cards
+    cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+            setTimeout(() => card.style.opacity = '1', 0);
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
 // Handle contact form submission
 function handleSubmit(event) {
     event.preventDefault();
@@ -44,7 +64,7 @@ document.addEventListener('scroll', () => {
     });
 });
 
-// Lazy load images (placeholder)
+// Lazy load images
 document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('img');
     images.forEach(img => {
@@ -54,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add property card click handlers
+// Add rental card click handlers
 document.addEventListener('DOMContentLoaded', () => {
-    const propertyButtons = document.querySelectorAll('.btn-secondary');
-    propertyButtons.forEach(button => {
+    const rentalButtons = document.querySelectorAll('.btn-secondary');
+    rentalButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const card = e.target.closest('.property-card');
-            const propertyName = card.querySelector('h3').textContent;
-            alert(`Would you like to book ${propertyName}? Contact us for more details!`);
+            const itemName = card.querySelector('h3').textContent;
+            alert(`Would you like to rent the ${itemName}? Contact us for availability and booking details!`);
         });
     });
 });
